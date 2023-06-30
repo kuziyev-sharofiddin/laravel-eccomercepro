@@ -62,11 +62,13 @@
                     @foreach ($categories as $category)
                     <tr>
                         <td>{{$category->category_name}}</td>
-                        <td><form action="{{ route('delete_category', ['category'=>$category->id]) }}" method="POST" onsubmit="return confirm('Are you sure to delete?')">
-                            @csrf
-                            @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Delete</button>
-                        </form></td>
+                        <td>
+                            <form action="{{ route('delete_category', ['category'=>$category->id]) }}" method="POST" onsubmit="return confirm('Are you sure to delete?')">
+                                    @csrf
+                                    @method('DELETE')
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                 </table>
