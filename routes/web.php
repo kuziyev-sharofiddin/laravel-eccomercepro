@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/redirect', [HomeController::class, 'redirect']);
+Route::get('/view_category', [AdminController::class, 'view_category'])->name('view_category');
+Route::post('/add_category', [AdminController::class, 'add_category'])->name('add_category');
+Route::post('/delete_category/{category}', [AdminController::class, 'delete_category'])->name('delete_category');
 
 Route::middleware([
     'auth:sanctum',
@@ -26,3 +31,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+
