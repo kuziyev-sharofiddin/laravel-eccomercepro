@@ -58,27 +58,28 @@
                     <h2 class="h2_font">
                         Add Product
                     </h2>
-                    <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('products.update', ['product'=>$product->id])}}" method="POST" enctype="multipart/form-data">
+                        @method('PUT')
                         @csrf
                         <div class="div_design">
                         <label for="">Product Title:</label>
-                        <input type="text" class="input_color" name="title" placeholder="Write product title">
+                        <input type="text" class="input_color" value="{{ $product->title }}" name="title" placeholder="Write product title">
                         </div>
                         <div class="div_design">
                         <label for="">Product Description:</label>
-                        <input type="text" class="input_color" name="description" placeholder="Write product description">
+                        <input type="text" class="input_color" value="{{ $product->description }}" name="description" placeholder="Write product description">
                         </div>
                         <div class="div_design">
                         <label for="">Product Price:</label>
-                        <input type="number" class="input_color" name="price" placeholder="Write product price">
+                        <input type="number" class="input_color" value="{{ $product->price }}" name="price" placeholder="Write product price">
                         </div>
                         <div class="div_design">
                         <label for="">Discount Price:</label>
-                        <input type="number" class="input_color" name="discount_price" placeholder="Write product discount_price">
+                        <input type="number" class="input_color" value="{{ $product->discount_price }}" name="discount_price" placeholder="Write product discount_price">
                         </div>
                         <div class="div_design">
                         <label for="">Product Quantity:</label>
-                        <input type="number" class="input_color" name="quantity" placeholder="Write product quantity">
+                        <input type="number" class="input_color" value="{{ $product->quantity }}" name="quantity" placeholder="Write product quantity">
                         </div>
                         <div class="div_design">
                         <label for="">Select Product Category:</label>

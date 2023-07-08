@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <!-- Basic -->
       <base href="/public">
+      <!-- Basic -->
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <!-- Mobile Metas -->
@@ -24,25 +24,13 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    </head>
    <body>
-        @include('sweetalert::alert')
+    @include('sweetalert::alert')
       <div class="hero_area">
          <!-- header section strats -->
          @include('home.header')
          <!-- end header section -->
-         <!-- slider section -->
-         @include('home.slider')
-         <!-- end slider section -->
-
-      <!-- why section -->
-      @include('home.why')
-      <!-- end why section -->
-
-      <!-- arrival section -->
-      @include('home.arrival')
-      <!-- end arrival section -->
-
       <!-- product section -->
-      @include('home.product')
+         @include('home.product_view')
       <!-- end product section -->
      <!--  Comment section -->
      <div style="text-align: center; padding-bottom:30px;">
@@ -91,15 +79,6 @@
      </div>
 
       <!-- end Comment section -->
-      <!-- subscribe section -->
-      @include('home.subscribe')
-      <!-- end subscribe section -->
-      <!-- client section -->
-      @include('home.client')
-      <!-- end client section -->
-      <!-- footer start -->
-      @include('home.footer')
-      <!-- footer end -->
       <div class="cpy_">
          <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
 
