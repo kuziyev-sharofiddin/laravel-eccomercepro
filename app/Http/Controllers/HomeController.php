@@ -8,9 +8,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Comment;
 use App\Models\Reply;
+use App\Models\Contact;
 use Session;
 use Stripe;
 
@@ -19,9 +21,10 @@ class HomeController extends Controller
 
     public function index(){
         return view('home.userpage')->with([
-            'products'=> Product::paginate(5),
+            'products'=> Product::paginate(6),
             'comments' => Comment::orderby('id', 'desc')->get(),
             'replies' => Reply::all(),
+            'categories' => Category::all()
         ]);
     }
 
@@ -58,15 +61,19 @@ class HomeController extends Controller
         {
 
             return view('home.userpage')->with([
-                'products'=> Product::paginate(5),
+                'products'=> Product::paginate(6),
                 'comments' => Comment::orderby('id', 'desc')->get(),
                 'replies' => Reply::all(),
+                'categories' => Category::all()
         ]);
         }
     }
 
     public function product_details(Product $product){
-        return view('home.product_details')->with(['product'=> $product]);
+        return view('home.product_details')->with([
+            'product'=> $product,
+            'categories' => Category::all()
+        ]);
     }
 
     public function add_cart(Request $request, Product $product, Cart $cart){
@@ -134,7 +141,10 @@ class HomeController extends Controller
         if(Auth::id()){
             $id = Auth::user()->id;
             $carts = Cart::where('user_id', '=', $id)->get();
-            return view('home.show_cart')->with(['carts'=> $carts]);
+            return view('home.show_cart')->with([
+                'carts'=> $carts,
+                'categories' => Category::all(),
+            ]);
         }
         else
         {
@@ -223,7 +233,10 @@ class HomeController extends Controller
         {
             $id = Auth::user()->id;
             $orders = Order::where('user_id', '=', $id)->get();
-            return view('home.show_order')->with(['orders'=> $orders]);
+            return view('home.show_order')->with([
+                'orders'=> $orders,
+                'categories' => Category::all(),
+            ]);
         }
 
         else
@@ -279,14 +292,16 @@ class HomeController extends Controller
             'products' => $products,
             'comments' => Comment::orderby('id', 'desc')->get(),
             'replies' => Reply::all(),
+            'categories' => Category::all(),
         ]);
     }
 
     public function products(){
         return view('home.all_product')->with([
-            'products' => Product::paginate(10),
+            'products' => Product::paginate(6),
             'comments' => Comment::orderby('id', 'desc')->get(),
             'replies' => Reply::all(),
+            'categories' => Category::all(),
             'message' => 'Product Added Successfully'
         ]);
     }
@@ -298,6 +313,39 @@ class HomeController extends Controller
             'products' => $products,
             'comments' => Comment::orderby('id', 'desc')->get(),
             'replies' => Reply::all(),
+            'categories' => Category::all(),
         ]);
     }
+
+    public function product_category(Category $category, Request $request){
+        $searchText = $request->search;
+        $products  = Product::where('title', 'LIKE', "%$searchText%")->orWhere('description', 'LIKE', "%$searchText%");
+        return view('home.product_category')->with([
+            'products' => $products,
+            'comments' => Comment::orderby('id', 'desc')->get(),
+            'replies' => Reply::all(),
+            'category' => $category,
+            'categories' => Category::all(),
+        ]);
+    }
+
+    public function contact(){
+
+        return view('home.contact')->with([
+            'categories' => Category::all(),
+        ]);
+    }
+
+    public function contact_store(Request $request){
+        $contact  = Contact::create([
+            "name"=>$request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->back();
+    }
+
+
 }

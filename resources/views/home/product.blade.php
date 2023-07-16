@@ -68,12 +68,9 @@
              </div>
           </div>
         @endforeach
+        <div style="margin-top:20px;">
         {{ $products->links() }}
-       </div>
-       <div class="btn-box">
-          <a href="">
-          View All products
-          </a>
+        </div>
        </div>
     </div>
  </section>

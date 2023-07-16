@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
+use App\Models\Contact;
 use PDF;
 
 class AdminController extends Controller
@@ -66,5 +67,22 @@ class AdminController extends Controller
         return view('admin.order')->with([
             'orders' => $orders,
         ]);
+    }
+
+    public function contact(){
+        return view('admin.contact')->with([
+            'contacts' => Contact::all()
+            ]);
+    }
+
+    public function contact_destroy(Contact $contact){
+        if(Auth::id()){
+            $contact->delete();
+            return redirect()->back();
+        }
+        else
+        {
+            return redirect('login');
+        }
     }
 }

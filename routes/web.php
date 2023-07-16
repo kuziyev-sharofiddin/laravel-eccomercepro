@@ -22,7 +22,10 @@ Route::post('/add_reply', [HomeController::class, 'add_reply'])->name('add_reply
 Route::get('/product_search', [HomeController::class, 'product_search'])->name('product_search');
 Route::get('/search_product', [HomeController::class, 'search_product'])->name('search_product');
 Route::get('/productss', [HomeController::class, 'products'])->name('productss');
+Route::get('/product_category/{category}', [HomeController::class, 'product_category'])->name('product_category');
 Route::get('/show_order', [HomeController::class, 'show_order'])->name('show_order');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/contact_store', [HomeController::class, 'contact_store'])->name('contact_store');
 Route::get('/view_category', [AdminController::class, 'view_category'])->name('view_category');
 Route::post('/add_category', [AdminController::class, 'add_category'])->name('add_category');
 Route::delete('/delete_category/{category}', [AdminController::class, 'delete_category'])->name('delete_category');
@@ -30,6 +33,8 @@ Route::get('/order', [AdminController::class, 'order'])->name('order');
 Route::get('/delivered/{order}', [AdminController::class, 'delivered'])->name('delivered');
 Route::get('/print_pdf/{order}', [AdminController::class, 'print_pdf'])->name('print_pdf');
 Route::get('/search', [AdminController::class, 'search'])->name('search');
+Route::get('/contacts', [AdminController::class, 'contact'])->name('contacts');
+Route::delete('/contact_destroy/{contact}', [AdminController::class, 'contact_destroy'])->name('contact_destroy');
 Route::resources([
     'products' => ProductController::class,
 
