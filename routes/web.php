@@ -4,9 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AuthController;
 
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('register', [AuthController::class, 'register'])->name('register');
+Route::post('register_store', [AuthController::class, 'register_store'])->name('register.store');
 
 Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect')->middleware('auth', 'verified');
 Route::get('/product_details/{product}', [HomeController::class, 'product_details'])->name('product_details');
