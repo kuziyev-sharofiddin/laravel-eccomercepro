@@ -13,9 +13,7 @@ class AuthController extends Controller
 {
 
     public function login(){
-        return view('auth.login')->with([
-            'categories' => Category::all(),
-        ]);
+        return view('auth.login');
     }
 
     public function authenticate(Request $request): RedirectResponse
@@ -38,9 +36,7 @@ class AuthController extends Controller
     }
 
     public function register(){
-        return view('auth.register')->with([
-            'categories' => Category::all(),
-        ]);
+        return view('auth.register');
     }
 
     public function register_store(Request $request): RedirectResponse

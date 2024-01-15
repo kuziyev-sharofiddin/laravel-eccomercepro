@@ -26,7 +26,7 @@
    <body>
       <div class="hero_area">
          <!-- header section strats -->
-         @include('home.header')
+         {{-- @include('home.header') --}}
          <!-- end header section -->
         <div style="padding-left:500px; padding-right:50px; padding-top:100px; padding-bottom:50px;">
         <form action="{{ route('authenticate') }}" method="POST">

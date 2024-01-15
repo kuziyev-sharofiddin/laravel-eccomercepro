@@ -1,54 +1,41 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Category;
-use App\Models\Product;
-use Illuminate\Support\Facades\Storage;
+
+use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use Illuminate\Support\Facades\Auth;
-
-
-use Illuminate\Http\Request;
+use App\Service\ProductService;
 
 class ProductController extends Controller
 {
-
-    public function index()
+    public function __construct(protected ProductService $productservice)
     {
-        return view('admin.show_products')->with([
-            'products' => Product::all(),
-        ]);
+
     }
 
+    public function show()
+    {
 
+        $products = $this->productservice->getByPaginate(10);
+        return view('admin.show_products')->with([
+            'products' => $products,
+        ]);
+    }
     public function create()
     {
+        $categories = $this->productservice->getByCategoryPaginate(10);
         return view('admin.add_product')->with([
-            'categories' => Category::all(),
+            'categories' => $categories,
         ]);
     }
 
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         if(Auth::id())
         {
-            if ($request->hasFile('image')){
-                $name = $request->file('image')->getClientOriginalName();
-                $path = $request->file('image')->storeAs('product-images', $name);
-            }
-
-
-            $post = Product::create([
-                // 'user_id'=>auth()->user()->id,
-                "category_id"=>$request->category_id,
-                'title' => $request->title,
-                'description' => $request->description,
-                'quantity' => $request->quantity,
-                'price' => $request->price,
-                'discount_price' => $request->discount_price,
-                'image' => $path ?? null,
-            ]);
-
+            $this->productservice->create($request->all());
             return redirect()->route('products.index');
         }
         else
@@ -59,41 +46,22 @@ class ProductController extends Controller
 
 
 
-    public function edit(Product $product)
+    public function edit($product,$limit)
     {
+        $product = $this->productservice->getById($product);
+        $categories = $this->productservice->getByCategoryPaginate($limit);
         return view('admin.edit_product')->with([
             'product'=>$product,
-            'categories' => Category::all()]);
+            'categories' => $categories,
+        ]);
     }
 
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdateRequest $request, $product)
     {
-        // Gate::authorize('update-post', $post);
-
         if(Auth::id())
         {
-            if ($request->hasFile('image')){
-
-                if (isset($product->image)){
-                    Storage::delete($product->image);
-                }
-
-                $name = $request->file('image')->getClientOriginalName();
-                $path = $request->file('image')->storeAs('product-images', $name);
-            }
-
-            $product->update([
-                // 'user_id'=>auth()->user()->id,
-                "category_id"=>$request->category_id,
-                'title' => $request->title,
-                'description' => $request->description,
-                'quantity' => $request->quantity,
-                'price' => $request->price,
-                'discount_price' => $request->discount_price,
-                'photo' => $path ?? $product->image,
-
-            ]);
-            return redirect()->route('products.index', ['product' => $product->id]);
+            $product = $this->productservice->update($product,$request->all());
+            return redirect()->route('products.index', ['product' => $product]);
         }
         else
         {
@@ -102,20 +70,15 @@ class ProductController extends Controller
     }
 
 
-    public function destroy(Product $product)
+    public function destroy($product)
     {
         if(Auth::id()){
-            if (isset($product->image)){
-                Storage::delete($product->image);
-            }
-
-            $product->delete();
+            $this->productservice->destroy($product);
             return redirect()->route('products.index');
         }
         else
         {
             return redirect('login');
         }
-
     }
 }
