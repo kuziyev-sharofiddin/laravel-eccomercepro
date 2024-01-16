@@ -35,9 +35,9 @@ class BaseRepository implements BaseInterface
         return $this->model->paginate($limit);
     }
 
-    public function categoryByPaginate($limit)
+    public function categoryByPaginate()
     {
-        return $this->model->paginate($limit);
+        return $this->model->all();
     }
 
     public function delete($id)
@@ -45,4 +45,8 @@ class BaseRepository implements BaseInterface
        return $this->getById($id)->delete();
     }
 
+    public function getSearchOrder($searchText)
+    {
+        return $this->model->where('name', 'LIKE', "%$searchText%")->orWhere('phone', 'LIKE', "%$searchText%")->orWhere('product_title', 'LIKE', "%$searchText%")->paginate(10);
+    }
 }

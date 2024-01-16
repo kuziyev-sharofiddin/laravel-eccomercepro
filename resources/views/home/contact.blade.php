@@ -22,6 +22,7 @@
       <!-- responsive style -->
       <link href="home/css/responsive.css" rel="stylesheet" />
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      @livewireStyles
    </head>
    <body>
       <div class="hero_area">
@@ -61,5 +62,6 @@
       <script src="home/js/bootstrap.js"></script>
       <!-- custom js -->
       <script src="home/js/custom.js"></script>
+      @livewireScripts
    </body>
 </html>

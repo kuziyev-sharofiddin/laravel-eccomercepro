@@ -50,6 +50,7 @@
         padding: 40px;
       }
       </style>
+      @livewireStyles
    </head>
    <body>
     @include('sweetalert::alert')
@@ -143,5 +144,6 @@
       <script src="home/js/bootstrap.js"></script>
       <!-- custom js -->
       <script src="home/js/custom.js"></script>
+      @livewireScripts
    </body>
 </html>

@@ -1,19 +1,42 @@
 <?php
 
+use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\AuthController;
+use App\Http\Livewire\CategoryLivewire;
+
+// Admin  Category
+Route::get('/category/view', [CategoryController::class, 'view_category'])->name('view_category');
+Route::post('/category/store', [CategoryController::class, 'add_category'])->name('add_category');
+Route::delete('/category/{category}/delete', [CategoryController::class, 'delete_category'])->name('delete_category');
+
+
+
+// Admin Contact
+Route::delete('/contact/{contact}/delete', [ContactController::class, 'contact_destroy'])->name('contact_destroy');
+Route::get('/contacts', [ContactController::class, 'contact'])->name('contacts');
+
+// Admin Order
+Route::get('/orders', [OrderController::class, 'getOrderSearch'])->name('order');
+Route::get('/delivered/{order}', [OrderController::class, 'delivered'])->name('delivered');
+
+// Admin  Product
+Route::resources(['products' => ProductController::class,]);
+
+// Authentication
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register_store', [AuthController::class, 'register_store'])->name('register.store');
 
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('login', [AuthController::class, 'login'])->name('login');
-Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('register', [AuthController::class, 'register'])->name('register');
-Route::post('register_store', [AuthController::class, 'register_store'])->name('register.store');
-
+Route::get('/', [HomeController::class, 'header']);
 Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect')->middleware('auth', 'verified');
 Route::get('/product_details/{product}', [HomeController::class, 'product_details'])->name('product_details');
 Route::post('/add_cart/{product}', [HomeController::class, 'add_cart'])->name('add_cart');
@@ -32,19 +55,6 @@ Route::get('/product_category/{category}', [HomeController::class, 'product_cate
 Route::get('/show_order', [HomeController::class, 'show_order'])->name('show_order');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact_store', [HomeController::class, 'contact_store'])->name('contact_store');
-Route::get('/view_category', [AdminController::class, 'view_category'])->name('view_category');
-Route::post('/add_category', [AdminController::class, 'add_category'])->name('add_category');
-Route::delete('/delete_category/{category}', [AdminController::class, 'delete_category'])->name('delete_category');
-Route::get('/order', [AdminController::class, 'order'])->name('order');
-Route::get('/delivered/{order}', [AdminController::class, 'delivered'])->name('delivered');
-Route::get('/print_pdf/{order}', [AdminController::class, 'print_pdf'])->name('print_pdf');
-Route::get('/search', [AdminController::class, 'search'])->name('search');
-Route::get('/contacts', [AdminController::class, 'contact'])->name('contacts');
-Route::delete('/contact_destroy/{contact}', [AdminController::class, 'contact_destroy'])->name('contact_destroy');
-Route::resources([
-    'products' => ProductController::class,
-
-]);
 
 Route::middleware([
     'auth:sanctum',

@@ -10,14 +10,14 @@
                         <li class="nav-item active">
                            <a class="nav-link" href="\">Home <span class="sr-only">(current)</span></a>
                         </li>
-                       <li class="nav-item dropdown">
-                           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Category<span class="caret"></span></a>
-                           <ul class="dropdown-menu">
-                            @foreach ($categories as $category)
-                              <li><a href="{{route('product_category', ['category' => $category->id])}}">{{$category->category_name}}</a></li>
-                            @endforeach
-                           </ul>
-                        </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Category<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                 @foreach ($categories as $category)
+                                   <li><a href="{{route('product_category', ['category' => $category->id])}}">{{$category->category_name}}</a></li>
+                                 @endforeach
+                                </ul>
+                             </li>
                         <li class="nav-item">
                            <a class="nav-link" href="{{ route('productss') }}">Products</a>
                         </li>

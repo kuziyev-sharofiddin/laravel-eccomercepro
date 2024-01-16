@@ -18,11 +18,6 @@ class ProductService
         return $this->repository->paginate($limit);
     }
 
-    public function getByCategoryPaginate($limit)
-    {
-        return $this->repository->categoryByPaginate($limit);
-    }
-
     public function create(array $data){
 
             if (isset($data['image'])){

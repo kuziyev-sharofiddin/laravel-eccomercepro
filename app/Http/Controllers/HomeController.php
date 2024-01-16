@@ -13,18 +13,29 @@ use App\Models\Order;
 use App\Models\Comment;
 use App\Models\Reply;
 use App\Models\Contact;
+use App\Service\CategoryService;
 use Session;
 use Stripe;
 
 class HomeController extends Controller
 {
 
+    public function __construct(protected CategoryService $categoryService)
+    {
+
+    }
+
+    public function header(){
+        $categories = $this->categoryService->getByCategoryPaginate();
+        return view('home.header')->with([
+            'categories' => $categories,
+        ]);
+    }
+
     public function index(){
         return view('home.userpage')->with([
             'products'=> Product::paginate(6),
-            'comments' => Comment::orderby('id', 'desc')->get(),
-            'replies' => Reply::all(),
-            'categories' => Category::all()
+            // 'categories' => Category::all()
         ]);
     }
 
@@ -336,6 +347,7 @@ class HomeController extends Controller
         ]);
     }
 
+
     public function contact_store(Request $request){
         $contact  = Contact::create([
             "name"=>$request->name,
@@ -346,6 +358,4 @@ class HomeController extends Controller
 
         return redirect()->back();
     }
-
-
 }

@@ -58,7 +58,7 @@
             <div class="content-wrapper">
                 <h2 class="font_size">All Products</h2>
                 <div style="margin: auto; padding-bottom: 30px;">
-                <form action="{{route('search')}}" method="GET">
+                <form action="" method="GET">
                     @csrf
                     <input type="text" name="search" style="color: black;" placeholder="Search For Something">
                     <input type="submit" value="Search" class="btn btn-outline-primary">

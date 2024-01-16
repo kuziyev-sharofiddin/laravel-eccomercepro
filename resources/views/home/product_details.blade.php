@@ -21,6 +21,7 @@
       <link href="/home/css/style.css" rel="stylesheet" />
       <!-- responsive style -->
       <link href="/home/css/responsive.css" rel="stylesheet" />
+      @livewireStyles
    </head>
    <body>
     <div class="hero_area">
@@ -87,5 +88,6 @@
       <script src="home/js/bootstrap.js"></script>
       <!-- custom js -->
       <script src="home/js/custom.js"></script>
+      @livewireScripts
    </body>
 </html>
