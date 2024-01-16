@@ -15,11 +15,29 @@ class OrderService
         return $this->repository->getSearchOrder($searchText);
     }
 
-    public function getById($order)
+    public function getByStatus($order)
     {
         $order = $this->repository->getById($order);
         $order->delivery_status='delivered';
         $order->payment_status='Paid';
+        $order->save();
+        return $order;
+    }
+
+    public function getByPaginate($limit)
+    {
+        return $this->repository->paginate($limit);
+    }
+
+    public function getById($id)
+    {
+       return $this->repository->getById($id);
+    }
+
+    public function cancelOrder($order)
+    {
+        $order = $this->repository->getById($order);
+        $order->delivery_status='You canceled the order';
         $order->save();
         return $order;
     }

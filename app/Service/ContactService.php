@@ -16,13 +16,16 @@ class ContactService
     {
         return $this->repository->paginate($limit);
     }
+    public function create(array $data){
+        $contact = [
+            "name"=> $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'description' => $data['description'],
+        ];
 
-    // public function create(array $data){
-    //     $category = [
-    //         "category_name"=> $data["category_name"],
-    //     ];
-    //     $this->repository->create($category);
-    // }
+        return $this->repository->create($contact);
+}
 
     public function destroy($contact){
         return $this->repository->delete($contact);

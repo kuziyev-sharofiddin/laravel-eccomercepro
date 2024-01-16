@@ -16,7 +16,7 @@
       <!-- bootstrap core css -->
       <link rel="stylesheet" type="text/css" href="/home/css/bootstrap.css" />
       <!-- font awesome style -->
-      <link href="home/css/font-awesome.min.css" rel="stylesheet" />
+      <link href="/home/css/font-awesome.min.css" rel="stylesheet" />
       <!-- Custom styles for this template -->
       <link href="/home/css/style.css" rel="stylesheet" />
       <!-- responsive style -->
@@ -81,13 +81,13 @@
          </p>
       </div>
       <!-- jQery -->
-      <script src="home/js/jquery-3.4.1.min.js"></script>
+      <script src="/home/js/jquery-3.4.1.min.js"></script>
       <!-- popper js -->
-      <script src="home/js/popper.min.js"></script>
+      <script src="/home/js/popper.min.js"></script>
       <!-- bootstrap js -->
-      <script src="home/js/bootstrap.js"></script>
+      <script src="/home/js/bootstrap.js"></script>
       <!-- custom js -->
-      <script src="home/js/custom.js"></script>
+      <script src="/home/js/custom.js"></script>
       @livewireScripts
    </body>
 </html>

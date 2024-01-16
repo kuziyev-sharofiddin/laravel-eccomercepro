@@ -49,4 +49,9 @@ class BaseRepository implements BaseInterface
     {
         return $this->model->where('name', 'LIKE', "%$searchText%")->orWhere('phone', 'LIKE', "%$searchText%")->orWhere('product_title', 'LIKE', "%$searchText%")->paginate(10);
     }
+
+    public function getSearchProduct($searchText)
+    {
+        return $this->model->where('title', 'LIKE', "%$searchText%")->orWhere('description', 'LIKE', "%$searchText%")->paginate(10);
+    }
 }

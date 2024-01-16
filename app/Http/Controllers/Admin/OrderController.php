@@ -20,7 +20,7 @@ class OrderController extends Controller
         ]);
     }
     public function delivered($order){
-        $order = $this->orderService->getById($order);
+        $order = $this->orderService->getByStatus($order);
         return redirect()->back();
     }
 }

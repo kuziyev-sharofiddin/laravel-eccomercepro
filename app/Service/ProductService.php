@@ -74,4 +74,9 @@ class ProductService
             }
             return $this->repository->delete($product);
     }
+
+    public function getSearchProduct($searchText)
+    {
+        return $this->repository->getSearchProduct($searchText);
+    }
 }

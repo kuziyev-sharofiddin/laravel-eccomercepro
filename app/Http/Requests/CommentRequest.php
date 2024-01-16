@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ContactRequest extends FormRequest
+class CommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,8 @@ class ContactRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'description' => 'required',
+            'comment' => 'required',
+            'user_id' => 'required',
         ];
     }
 }
