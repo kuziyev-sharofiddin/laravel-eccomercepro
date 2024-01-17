@@ -8,14 +8,14 @@ use App\Http\Controllers\Admin\ProductController;
 
 
 // Admin  Category
-Route::get('/category/view', [CategoryController::class, 'view_category'])->name('view_category');
-Route::post('/category/store', [CategoryController::class, 'add_category'])->name('add_category');
-Route::delete('/category/{category}/delete', [CategoryController::class, 'delete_category'])->name('delete_category');
+Route::get('/category/view', [CategoryController::class, 'viewCategory'])->name('view_category');
+Route::post('/category/store', [CategoryController::class, 'addCategory'])->name('add_category');
+Route::delete('/category/{category}/delete', [CategoryController::class, 'deleteCategory'])->name('delete_category');
 
 
 
 // Admin Contact
-Route::delete('/contact/{contact}/delete', [ContactController::class, 'contact_destroy'])->name('contact_destroy');
+Route::delete('/contact/{contact}/delete', [ContactController::class, 'contactDestroy'])->name('contact_destroy');
 Route::get('/contacts', [ContactController::class, 'contact'])->name('contacts');
 
 // Admin Order

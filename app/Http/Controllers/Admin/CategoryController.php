@@ -14,7 +14,7 @@ class CategoryController extends Controller
 
     }
 
-    public function view_category()
+    public function viewCategory()
     {
         if(Auth::id())
         {
@@ -29,12 +29,12 @@ class CategoryController extends Controller
         }
     }
 
-    public function add_category(CategoryRequest $request){
+    public function addCategory(CategoryRequest $request){
         $this->categoryService->create($request->all());
         return redirect()->back()->with('message', 'Category Added Successfully');
     }
 
-    public function delete_category($category){
+    public function deleteCategory($category){
         $this->categoryService->destroy($category);
         return redirect()->back()->with('message','Category Deleted Successfully');
     }

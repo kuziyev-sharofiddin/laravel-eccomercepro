@@ -25,7 +25,7 @@ class ContactController extends Controller
             return redirect('login');
         }
     }
-    public function contact_destroy($contact){
+    public function contactDestroy($contact){
         if(Auth::id()){
             $this->contactService->destroy($contact);
         return redirect()->back()->with('message','Contact Deleted Successfully');
