@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AuthRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
-use App\Models\Category;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -16,17 +16,12 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function authenticate(Request $request): RedirectResponse
+    public function authenticate(AuthRequest $request): RedirectResponse
     {
-
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $credentials = $request->validated();
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
             return redirect()->intended('/');
         }
 
@@ -39,16 +34,9 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function register_store(Request $request): RedirectResponse
+    public function register_store(AuthRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|max:250|unique:users',
-            'phone' =>  'required',
-            'address' => 'required',
-            'password' => 'required|min:3',
-            'password_confirmation' => 'required|same:password',
-        ]);
+        $request->validated();
 
         User::create([
             'name' => $request->name,
@@ -69,11 +57,8 @@ class AuthController extends Controller
     public function logout(Request $request): RedirectResponse
 {
     Auth::logout();
-
     $request->session()->invalidate();
-
     $request->session()->regenerateToken();
-
     return redirect('/');
 }
 

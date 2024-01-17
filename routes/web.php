@@ -3,6 +3,7 @@ use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -29,6 +30,7 @@ Route::get('/product/details/{product}', [ProductController::class, 'productDeta
 //Order
 Route::get('/show/order', [OrderController::class, 'showOrder'])->name('show_order');
 Route::get('/cancel/{order}/order', [OrderController::class, 'cancelOrder'])->name('cancel_order');
+Route::get('/cash/order', [OrderController::class, 'cashOrder'])->name('cash_order');
 
 //Reply
 Route::post('/reply/add', [ReplyController::class, 'addReply'])->name('add_reply');
@@ -36,13 +38,13 @@ Route::post('/reply/add', [ReplyController::class, 'addReply'])->name('add_reply
 //Comment
 Route::post('/comment/add', [CommentController::class, 'addComment'])->name('add_comment');
 
+// Cart
+Route::post('/add/{product}/cart', [CartController::class, 'addCart'])->name('add_cart');
+Route::get('/show/cart', [CartController::class, 'showCart'])->name('show_cart');
+Route::get('/cart/{cart}/delete', [CartController::class, 'removeCart'])->name('remove_cart');
+
+// Home
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/', [HomeController::class, 'header']);
-Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect')->middleware('auth', 'verified');
-Route::post('/add_cart/{product}', [HomeController::class, 'add_cart'])->name('add_cart');
-Route::get('/show_cart', [HomeController::class, 'show_cart'])->name('show_cart');
-Route::get('/remove_cart/{cart}', [HomeController::class, 'remove_cart'])->name('remove_cart');
-Route::get('/cash_order', [HomeController::class, 'cash_order'])->name('cash_order');
 
 
 Route::middleware([

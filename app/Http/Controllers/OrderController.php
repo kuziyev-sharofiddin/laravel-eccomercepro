@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Service\OrderService;
 
@@ -32,5 +30,11 @@ class OrderController extends Controller
         $this->orderService->cancelOrder($order);
         return redirect()->back();
     }
+
+    public function cashOrder($order){
+        $this->orderService->cashOrder($order);
+        return redirect()->back()->with('message', 'We have Received your Order. We will connect with you soon...');
+    }
+
 
 }

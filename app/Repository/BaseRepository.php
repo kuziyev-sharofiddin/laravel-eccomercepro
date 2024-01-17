@@ -54,4 +54,14 @@ class BaseRepository implements BaseInterface
     {
         return $this->model->where('title', 'LIKE', "%$searchText%")->orWhere('description', 'LIKE', "%$searchText%")->paginate(10);
     }
+
+    public function getUserId($id)
+    {
+        return $this->model->where('user_id', '=', $id)->get();
+    }
+
+    public function getProductExistsId($product,$id)
+    {
+        return $this->model->where('product_id', '=', $product->id)->getUserId($id)->get('id')->first();
+    }
 }
